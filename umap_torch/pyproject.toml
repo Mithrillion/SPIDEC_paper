@@ -1,0 +1,20 @@
+[project]
+name = "umap-torch"
+version = "0.1.0"
+description = "PyTorch implementation of UMAP"
+requires-python = ">=3.11"
+dependencies = [
+    "torch",
+    "numpy",
+    "scipy",
+]
+
+[project.optional-dependencies]
+keops = ["pykeops"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["nonparametric_umap", "layouts", "utils"]

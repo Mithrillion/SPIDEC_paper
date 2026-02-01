@@ -1,0 +1,23 @@
+[project]
+name = "sigtools"
+version = "0.1.0"
+description = "Signal processing tools"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "torch",
+    "scikit-learn",
+]
+
+[project.optional-dependencies]
+signatures = ["signatory"]
+cuda = ["cuml", "cupy"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["transforms", "wavetools"]

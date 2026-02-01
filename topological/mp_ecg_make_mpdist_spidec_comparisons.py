@@ -1,4 +1,6 @@
 # %%
+!source ~/switch-cuda.sh 12.8
+# %%
 # loading ECG data
 import os
 import sys

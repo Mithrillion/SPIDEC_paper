@@ -9,7 +9,6 @@ from torch import Tensor
 
 import numpy as np
 
-from torch.utils.data.dataset import T_co
 from tqdm.auto import tqdm
 
 from umap.umap_ import find_ab_params
@@ -47,9 +46,10 @@ class EuclideanLayout(nn.Module):
         else:
             self._a = self.a
             self._b = self.b
-        self._a, self._b = torch.tensor(
-            self._a, device=init_embedding.device
-        ), torch.tensor(self._b, device=init_embedding.device)
+        self._a, self._b = (
+            torch.tensor(self._a, device=init_embedding.device),
+            torch.tensor(self._b, device=init_embedding.device),
+        )
 
     def _approximate_membership(self, x, y):
         return 1.0 / (1 + self._a * (torch.norm(x - y, dim=-1) ** (2 * self._b)))

@@ -3,7 +3,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.data as data
-from torch.utils.data.dataset import T_co
 import typing
 
 
@@ -44,7 +43,7 @@ class KNNGraphDataset(data.Dataset):
         self.n_samples = graph.shape[0]
         self.masked_positions = self.col_index_padded == -1
 
-    def __getitem__(self, index) -> T_co:
+    def __getitem__(self, index):
         return (
             index,
             self.col_index_padded[index, :],
@@ -64,7 +63,7 @@ class KNNGraphEdgeDataset(data.Dataset):
         self.indices = graph.indices()
         self.values = graph.values()
 
-    def __getitem__(self, index) -> T_co:
+    def __getitem__(self, index):
         return self.indices[:, index], self.values[index]
 
     def __len__(self):
@@ -163,7 +162,7 @@ class KNNGraphSampleDataset(data.Dataset):
             self.negative_sample_positions
         ]
 
-    def __getitem__(self, index) -> T_co:
+    def __getitem__(self, index):
         return (
             index,
             self.col_index_padded[index, :],
