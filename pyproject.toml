@@ -1,0 +1,52 @@
+[project]
+name = "phiss"
+version = "0.1.0"
+description = "PHISS - Time Series Analysis with Topological Methods"
+requires-python = ">=3.8"
+dependencies = [
+    "torch",
+    "numpy",
+    "pandas",
+    "scipy",
+    "scikit-learn",
+    "hdbscan",
+    "holoviews[bokeh]",
+    "colorcet",
+    "tqdm",
+    "wfdb",
+    "ripser",
+    "persim",
+    "giotto-tda",
+    "matplotlib",
+    "numba",
+    "umap-learn",
+    "bokeh>=2.4,<3.0",
+    "FrEIA",
+    "rocket",
+    "sigtools",
+    "tsprofiles",
+    "umap-torch",
+    "gudhi",
+    "keops",
+    "pytest",
+    "jupyter",
+    "pykeops",
+]
+
+[project.optional-dependencies]
+signatures = [
+    "signatory",
+]
+
+[tool.uv.sources]
+rocket = { path = "rocket", editable = true }
+sigtools = { path = "sigtools", editable = true }
+tsprofiles = { path = "tsprofiles", editable = true }
+umap-torch = { path = "umap_torch", editable = true }
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = []

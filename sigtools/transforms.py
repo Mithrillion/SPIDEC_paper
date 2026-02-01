@@ -2,7 +2,14 @@ import numpy as np
 import pandas as pd
 from scipy.interpolate import splrep, splev
 
-import signatory
+try:
+    import signatory
+
+    HAS_SIGNATORY = True
+except ImportError:
+    HAS_SIGNATORY = False
+    signatory = None
+
 import torch
 import warnings
 
@@ -218,7 +225,16 @@ def rescale_path(path, depth):
 
 
 def estimate_depth_limit(dims, data_size, strict=True, sig_mode="logsig"):
-    sigch = signatory.logsignature_channels if sig_mode == "logsig" else signatory.signature
+    if not HAS_SIGNATORY:
+        raise ImportError(
+            "signatory is required for estimate_depth_limit. "
+            "Install it with: uv pip install signatory"
+        )
+    sigch = (
+        signatory.logsignature_channels
+        if sig_mode == "logsig"
+        else signatory.signature_channels
+    )
     for i in range(2, 10):
         if sigch(dims, i) > data_size:
             return i - 1 if strict and i > 2 else i
